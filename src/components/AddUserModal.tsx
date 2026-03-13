@@ -1,4 +1,4 @@
-import { Button, Modal, Form, Input } from "antd";
+import { Button, Modal, Form, Input, Select } from "antd";
 import { useState } from "react";
 import { User } from "../pages/Users";
 
@@ -14,7 +14,10 @@ const AddUserModal = ({ users, setUsers }: Props) => {
   const addUser = (values: any) => {
     const newUser: User = {
       key: Date.now(),
-      ...values,
+      id: users.length + 1,
+      name: values.name,
+      email: values.email,
+      status: values.status,
     };
 
     setUsers([...users, newUser]);
@@ -39,8 +42,15 @@ const AddUserModal = ({ users, setUsers }: Props) => {
             <Input />
           </Form.Item>
 
-          <Form.Item name="role" label="Role" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item
+            name="status"
+            label="Status"
+            rules={[{ required: true }]}
+          >
+            <Select>
+              <Select.Option value="active">active</Select.Option>
+              <Select.Option value="inactive">inactive</Select.Option>
+            </Select>
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
