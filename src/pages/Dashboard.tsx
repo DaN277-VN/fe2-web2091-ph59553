@@ -2,26 +2,28 @@ import { Layout, Menu } from "antd";
 import { useState } from "react";
 import Users from "./Users";
 import Register from "./Register";
-import Students from "./Students.tsx";
-import Products from "./Products.tsx";
+import Students from "./Students";
+import Products from "./Products";
+import Login from "./Login";
 
 const { Header, Sider, Content } = Layout;
 
 const Dashboard = () => {
-  const [page, setPage] = useState("users");
+  const [page, setPage] = useState("login");
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
         <Menu
           theme="dark"
-          defaultSelectedKeys={["students"]}
+          defaultSelectedKeys={["login"]}
           onClick={(e) => setPage(e.key)}
           items={[
-            { key: "students", label: "Students" },
-            { key: "products", label: "Products" },
-            { key: "users", label: "Users" },
-            { key: "register", label: "Register" },
+            { key: "login", label: "Đăng nhập" },
+            { key: "register", label: "Đăng ký" },
+            { key: "students", label: "Sinh viên" },
+            { key: "products", label: "Sản phẩm" },
+            { key: "users", label: "Người dùng" },
           ]}
         />
       </Sider>
@@ -32,10 +34,11 @@ const Dashboard = () => {
         </Header>
 
         <Content style={{ padding: 20 }}>
+          {page === "login" && <Login />}
+          {page === "register" && <Register />}
           {page === "students" && <Students />}
           {page === "products" && <Products />}
           {page === "users" && <Users />}
-          {page === "register" && <Register />}
         </Content>
       </Layout>
     </Layout>
